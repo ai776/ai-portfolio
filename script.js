@@ -187,55 +187,11 @@ function initializeScrollAnimations() {
     window.addEventListener('scroll', requestParallaxUpdate);
 }
 
-// ===== MOUSE EFFECTS =====
+// ===== MOUSE EFFECTS (SIMPLIFIED FOR PERFORMANCE) =====
 function initializeMouseEffects() {
-    // Create cursor followers
-    const cursor = document.createElement('div');
-    cursor.className = 'cursor-follower';
-    cursor.innerHTML = '<div class="cursor-dot"></div>';
-    document.body.appendChild(cursor);
-    
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-    
-    // Track mouse movement
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-    
-    // Smooth cursor animation
-    function animateCursor() {
-        const speed = 0.15;
-        cursorX += (mouseX - cursorX) * speed;
-        cursorY += (mouseY - cursorY) * speed;
-        
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-        
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    
-    // Cursor interactions
-    const interactiveElements = document.querySelectorAll('a, button, .card, input, textarea, select');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursor.classList.add('cursor-hover');
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            cursor.classList.remove('cursor-hover');
-        });
-    });
-    
-    // Hide cursor on mobile
-    if (window.innerWidth <= 768) {
-        cursor.style.display = 'none';
-    }
+    // Cursor effects removed for better performance
+    // Focus on lightweight hover interactions instead
+    console.log('Mouse effects initialized (lightweight mode)');
 }
 
 // ===== PERFORMANCE OPTIMIZATIONS =====
@@ -414,15 +370,7 @@ function showNotification(message, type = 'info') {
 }
 
 function handleResize() {
-    // Update cursor visibility on resize
-    const cursor = document.querySelector('.cursor-follower');
-    if (cursor) {
-        if (window.innerWidth <= 768) {
-            cursor.style.display = 'none';
-        } else {
-            cursor.style.display = 'block';
-        }
-    }
+    // Cursor effects removed for performance
     
     // Recalculate animations if needed
     const cards = document.querySelectorAll('.card');
