@@ -3,11 +3,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // カードクリック時のインタラクション
     cards.forEach(card => {
-        card.addEventListener('click', function() {
-            // リンクがある場合はそちらを優先
+        card.addEventListener('click', function(e) {
+            // リンクがクリックされた場合は、そのまま処理を続行
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                return;
+            }
+            
+            // カード内のリンクを探す
             const link = this.querySelector('a');
             if (link) {
-                return; // リンクのクリックに委ねる
+                // リンクがある場合はそのURLに遷移
+                const href = link.getAttribute('href');
+                if (href.startsWith('http')) {
+                    // 外部リンクの場合は新しいタブで開く
+                    window.open(href, '_blank');
+                } else {
+                    // 内部リンクの場合は同じタブで遷移
+                    window.location.href = href;
+                }
+                return;
             }
             
             const title = this.querySelector('h3').textContent;
